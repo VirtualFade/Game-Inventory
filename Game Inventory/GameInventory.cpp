@@ -17,10 +17,29 @@ void GameInventory::addGame(const Game& game) {
 	if (isEmpty()) {
 		head = tail = newNode;
 	}
-	else {
+	
+	Node* current = head;
+
+	while (current != nullptr && current->getGame().getTitle() < game.getTitle()) {
+		current = current->getNext();
+	}
+
+	if (current == head && game.getTitle() < head->getGame().getTitle()) {
+		newNode->setNext(head);
+		head->setPrev(newNode);
+		head = newNode;
+	}
+	else if (current == nullptr) {
 		tail->setNext(newNode);
 		newNode->setPrev(tail);
 		tail = newNode;
+	}
+	else {
+		Node* prevNode = current->getPrev();
+		prevNode->setNext(newNode);
+		newNode->setPrev(prevNode);
+		newNode->setNext(current);
+		current->setPrev(newNode);
 	}
 	size++;
 }
