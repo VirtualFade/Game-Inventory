@@ -9,7 +9,7 @@ using namespace std;
 
 class Game
 {
-private:
+protected: //switched to protected for easy access from subclasses
 	string title;
 	string genre;
 	int year;
@@ -17,6 +17,7 @@ private:
 public:
 	Game();
 	Game(const string& title, const string& genre, int year, const Platform& platform);
+	virtual ~Game(); //destructor for game and its subclasses
 
 	void setTitle(const string& title);
 	void setGenre(const string& genre);
@@ -26,7 +27,7 @@ public:
 	string getGenre() const;
 	int getYear() const;
 	Platform getPlatform() const;
-	void printInfo() const;
+	virtual void printInfo() const; //printinfo for game and subclasses
 	bool operator==(const Game& other) const;
 	bool operator!=(const Game& other) const;
 };
