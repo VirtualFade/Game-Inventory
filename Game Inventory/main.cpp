@@ -28,19 +28,23 @@ GameInventory fullInventory;
 void displayMenu();
 void menuChoice(int choice);
 void runChoice();
+void countMenu();
+void inventoryChoice();
+void printMenu();
 
 int main() {
-	//runChoice();
-	cout << "Testing commit through VS"
+	Game game1("The Witcher 3", "RPG", 2015);
+	fullInventory.addGame(game1);
+	runChoice();
 	return 0;
 }
 
 void displayMenu() {
 	cout << " Game Inventory: " << endl;
 	cout << " (" << COUNT << ")" << "Count the number of games in inventory" << endl;
-	cout << " (" << PRINT_GAMES << ") Print all game titles available" << endl;
+	cout << " (" << PRINT_GAMES << ") Print all game titles available in inventory" << endl;
 	cout << " (" << ADD_GAME << ") Add game to inventory" << endl;
-	cout << " (" << SEARCH << ") Find game title in inventory" << endl;
+	cout << " (" << SEARCH << ") Find game title in inventory and display info" << endl;
 	cout << " (" << DELETE_GAME << ") Remove game from inventory" << endl;
 	cout << " (" << PLATFORM_LIST << ") Displays all platforms available" << endl;
 	cout << "Enter a number from " << min_menu_option << " to " << max_menu_option << ", or " << QUIT << " to exit" << endl;
@@ -49,10 +53,10 @@ void displayMenu() {
 void menuChoice(int choice) {
 	switch (choice) {
 	case COUNT:
-		cout << "COUNT not yet implemented" << endl;
+		countMenu();
 		break;
 	case PRINT_GAMES:
-		cout << "PRINT_GAMES not yet implemented" << endl;
+		printMenu();
 		break;
 	case ADD_GAME:
 		cout << "ADD_GAME not yet implemented" << endl;
@@ -83,4 +87,73 @@ void runChoice() {
 		menuChoice(userChoice);
 	}
 	cout << "Goodbye!" << endl;
+}
+
+void countMenu() {
+	int countChoice = -1;
+	do {
+		inventoryChoice();
+
+		cin >> countChoice;
+
+		switch (countChoice) {
+		case 1:
+			cout << "There are " << physicalInventory.getSize() << " physical games available." <<endl;
+			break;
+		case 2:
+			cout << "There are " << digitalInventory.getSize() << " digital games available." << endl;
+			break;
+		case 3:
+			cout << "There are " << fullInventory.getSize() << " total games available." << endl;
+			break;
+		case 0:
+			cout << "Returning to menu." << endl;
+			break;
+		default:
+			cout << "Option not available, try again." << endl;
+			break;
+		}
+	} while (!(countChoice >= 0 && countChoice <= 3));
+	return;
+}
+
+void printMenu() {
+	int printChoice = -1;
+	do {
+		inventoryChoice();
+
+		cin >> printChoice;
+		switch (printChoice) {
+		case 1:
+			cout << "Physical Games available" << endl;
+			cout << "------------------------" << endl;
+			physicalInventory.displayAll();
+			break;
+		case 2:
+			cout << "Digital Games available" << endl;
+			cout << "------------------------" << endl;
+			digitalInventory.displayAll();
+			break;
+		case 3:
+			cout << "Total Games available" << endl;
+			cout << "------------------------" << endl;
+			fullInventory.displayAll();
+			break;
+		case 0:
+			cout << "Returning to menu." << endl;
+			break;
+		default:
+			cout << "Option not available, try again." << endl;
+		}
+	} while (!(printChoice >= 0 && printChoice <= 3));
+	return;
+}
+
+void inventoryChoice() {
+	cout << "Select Inventory" << endl;
+	cout << "-----------------------------------" << endl;
+	cout << "(1) Physical Games Inventory" << endl;
+	cout << "(2) Digital Games Inventory" << endl;
+	cout << "(3) Total Games Inventory" << endl;
+	cout << "(0) Return to Menu" << endl;
 }

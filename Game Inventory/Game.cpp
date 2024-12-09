@@ -2,7 +2,7 @@
 
 
 Game::Game() : title("Unknown"), genre("Unknown"), year(0), platform() {}
-
+Game::Game(const string& title, const string& genre, int year) : title(title), genre(genre), year(year) {}
 Game::Game(const string& title, const string& genre, int year, const Platform& platform) : title(title), genre(genre), year(year), platform(platform) {}
 
 Game::~Game() {}
