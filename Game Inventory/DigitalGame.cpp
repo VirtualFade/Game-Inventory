@@ -9,6 +9,8 @@ DigitalGame::DigitalGame(const std::string& title, const std::string& genre, int
                          double downloadSize)
     : Game(title, genre, year, platform), downloadSize(downloadSize) {}
 
+DigitalGame:~DigitalGame() {}
+
 // Setter for downloadSize
 void DigitalGame::setDownloadSize(double size) {
     this->downloadSize = size;
