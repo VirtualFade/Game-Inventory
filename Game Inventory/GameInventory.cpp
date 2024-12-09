@@ -1,6 +1,6 @@
 #include "GameInventory.h"
 
-GameInventory::GameInventory() : head(nullptr), tail(nullptr) {}
+GameInventory::GameInventory() : head(nullptr), tail(nullptr), size(0) {}
 
 GameInventory::~GameInventory() {
 	Node* current = head;
@@ -16,6 +16,8 @@ void GameInventory::addGame(const Game& game) {
 
 	if (isEmpty()) {
 		head = tail = newNode;
+		size++;
+		return;
 	}
 	
 	Node* current = head;

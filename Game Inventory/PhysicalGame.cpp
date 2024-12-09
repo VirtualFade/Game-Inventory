@@ -22,7 +22,7 @@ float PhysicalGame::getDiscSize() const {
     return discSize;
 }
 
-void PhysicalGame::displayInfo() const {
+void PhysicalGame::printInfo() const {
     // Call the base class method to print common info
     Game::printInfo();
 
