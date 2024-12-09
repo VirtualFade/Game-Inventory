@@ -16,6 +16,7 @@ protected: //switched to protected for easy access from subclasses
 	Platform platform;
 public:
 	Game();
+	Game(const string& title, const string& genre, int year);
 	Game(const string& title, const string& genre, int year, const Platform& platform);
 	virtual ~Game(); //destructor for game and its subclasses
 
