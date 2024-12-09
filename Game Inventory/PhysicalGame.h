@@ -24,9 +24,10 @@ public:
     float getDiscSize() const;
 
     // Override displayInfo to include new attributes
-    void displayInfo() const override;
+    void printInfo() const override;
 };
 
 #endif
+
 
 
