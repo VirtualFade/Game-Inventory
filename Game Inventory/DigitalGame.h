@@ -14,6 +14,7 @@ public:
     DigitalGame();
     DigitalGame(const std::string& title, const std::string& genre, int year, const Platform& platform,
                 double downloadSize);
+    ~DigitalGame() override;
 
     // Setter for downloadSize
     void setDownloadSize(double size);
