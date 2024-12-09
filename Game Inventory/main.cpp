@@ -30,7 +30,8 @@ void menuChoice(int choice);
 void runChoice();
 
 int main() {
-	runChoice();
+	//runChoice();
+	cout << "Testing commit through VS"
 	return 0;
 }
 
