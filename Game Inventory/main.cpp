@@ -15,9 +15,9 @@ TO DO: Add linked lists for each type of game
 #include <iostream>
 using namespace std;
 
-enum Actions {QUIT, COUNT, PRINT_GAMES, ADD_GAME, LINEAR_SEARCH, DELETE_GAME};
+enum Actions {QUIT, COUNT, PRINT_GAMES, ADD_GAME, LINEAR_SEARCH, DELETE_GAME, PLATFORM_LIST};
 const int min_menu_option = COUNT;
-const int max_menu_option = DELETE_GAME;
+const int max_menu_option = PLATFORM_LIST;
 
 void displayMenu();
 
@@ -31,5 +31,6 @@ void displayMenu() {
 	cout << " (" << ADD_GAME << ") Add game to inventory" << endl;
 	cout << " (" << LINEAR_SEARCH << ") Find game title in inventory" << endl;
 	cout << " (" << DELETE_GAME << ") Remove game from inventory" << endl;
+	cout << " (" << PLATFORM_LIST << ") Displays all platforms available" << endl;
 	cout << "Enter a number from " << min_menu_option << " to " << max_menu_option << ", or " << QUIT << " to exit" << endl;
 }
