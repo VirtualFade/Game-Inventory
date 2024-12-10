@@ -23,4 +23,7 @@ public:
 	void printInfo() const;
 };
 
+extern Platform ps5;
+extern Platform xbox;
+extern Platform switchConsole;
 #endif

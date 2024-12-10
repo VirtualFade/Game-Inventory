@@ -6,7 +6,7 @@ DigitalGame::DigitalGame() : Game(), downloadSize(0.0) {}
 
 // Parameterized constructor
 DigitalGame::DigitalGame(const std::string& title, const std::string& genre, int year, const Platform& platform,
-                         double downloadSize)
+                         float downloadSize)
     : Game(title, genre, year, platform), downloadSize(downloadSize) {}
 
 DigitalGame::~DigitalGame() {}
@@ -17,7 +17,7 @@ void DigitalGame::setDownloadSize(double size) {
 }
 
 // Getter for downloadSize
-double DigitalGame::getDownloadSize() const {
+float DigitalGame::getDownloadSize() const {
     return downloadSize;
 }
 

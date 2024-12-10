@@ -10,9 +10,10 @@ class Node
 {
 public:
 	Node();
-	Node(const Game& gameInput);
-	void setGame(const Game& gameInput);
-	Game getGame() const;
+	Node(Game* gameInput);
+	~Node();
+	void setGame(Game* gameInput);
+	Game* getGame() const;
 	Node* getNext() const;
 	Node* getPrev() const;
 	void setNext(Node* nxt);
@@ -20,7 +21,7 @@ public:
 	bool operator==(const Node& other) const;
 	bool operator!=(const Node& other) const;
 private:
-	Game game;
+	Game* game;
 	Node* next;
 	Node* prev;
 };

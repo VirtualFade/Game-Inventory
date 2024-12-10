@@ -21,9 +21,9 @@ enum Actions {QUIT, COUNT, PRINT_GAMES, ADD_GAME, SEARCH, DELETE_GAME, PLATFORM_
 const int min_menu_option = COUNT;
 const int max_menu_option = PLATFORM_LIST;
 
-GameInventory digitalInventory;
-GameInventory physicalInventory;
-GameInventory fullInventory;
+GameInventory* digitalInventory = new GameInventory();
+GameInventory* physicalInventory = new GameInventory();
+GameInventory* fullInventory = new GameInventory();
 
 void displayMenu();
 void menuChoice(int choice);
@@ -31,11 +31,17 @@ void runChoice();
 void countMenu();
 void inventoryChoice();
 void printMenu();
+void addMenu();
+void addPhysical();
+void addDigital();
+void deleteMenu();
 
 int main() {
-	Game game1("The Witcher 3", "RPG", 2015);
-	fullInventory.addGame(game1);
+	Game* newGame = new PhysicalGame("The last of us Part II", "Action-Adventure", 2020, ps5, false, 50);
+	physicalInventory->addGame(newGame);
+	fullInventory->addGame(newGame);
 	runChoice();
+	delete fullInventory;
 	return 0;
 }
 
@@ -59,13 +65,13 @@ void menuChoice(int choice) {
 		printMenu();
 		break;
 	case ADD_GAME:
-		cout << "ADD_GAME not yet implemented" << endl;
+		addMenu();
 		break;
 	case SEARCH:
 		cout << "SEARCH not yet implemented" << endl;
 		break;
 	case DELETE_GAME:
-		cout << "DELETE_GAME not yet implemented" << endl;
+		deleteMenu();
 		break;
 	case PLATFORM_LIST:
 		cout << "PLATFORM_LIST not yet implemented" << endl;
@@ -98,13 +104,13 @@ void countMenu() {
 
 		switch (countChoice) {
 		case 1:
-			cout << "There are " << physicalInventory.getSize() << " physical games available." <<endl;
+			cout << "There are " << physicalInventory->getSize() << " physical games available." <<endl;
 			break;
 		case 2:
-			cout << "There are " << digitalInventory.getSize() << " digital games available." << endl;
+			cout << "There are " << digitalInventory->getSize() << " digital games available." << endl;
 			break;
 		case 3:
-			cout << "There are " << fullInventory.getSize() << " total games available." << endl;
+			cout << "There are " << fullInventory->getSize() << " total games available." << endl;
 			break;
 		case 0:
 			cout << "Returning to menu." << endl;
@@ -127,17 +133,17 @@ void printMenu() {
 		case 1:
 			cout << "Physical Games available" << endl;
 			cout << "------------------------" << endl;
-			physicalInventory.displayAll();
+			physicalInventory->displayAll();
 			break;
 		case 2:
 			cout << "Digital Games available" << endl;
 			cout << "------------------------" << endl;
-			digitalInventory.displayAll();
+			digitalInventory->displayAll();
 			break;
 		case 3:
 			cout << "Total Games available" << endl;
 			cout << "------------------------" << endl;
-			fullInventory.displayAll();
+			fullInventory->displayAll();
 			break;
 		case 0:
 			cout << "Returning to menu." << endl;
@@ -156,4 +162,156 @@ void inventoryChoice() {
 	cout << "(2) Digital Games Inventory" << endl;
 	cout << "(3) Total Games Inventory" << endl;
 	cout << "(0) Return to Menu" << endl;
+}
+
+void addMenu() {
+	int addChoice = -1;
+	do {
+
+		cout << "Select Inventory to add game to" << endl;
+		cout << "-----------------------------------" << endl;
+		cout << "(1) Physical Games Inventory" << endl;
+		cout << "(2) Digital Games Inventory" << endl;
+		cout << "(0) Return to Menu" << endl;
+		cin >> addChoice;
+		switch (addChoice) {
+		case 1:
+			addPhysical();
+			break;
+		case 2:
+			addDigital();
+			break;
+		case 0:
+			cout << "Returning to menu." << endl;
+			break;
+		default:
+			cout << "Option not available, try again." << endl;
+		}
+	} while (!(addChoice >= 0 && addChoice <= 3));
+}
+
+void addPhysical() {
+	string title;
+	string genre;
+	int year;
+	string platform;
+	Game* physical = new PhysicalGame();
+	PhysicalGame* physicalGame = dynamic_cast<PhysicalGame*>(physical);
+	bool isCollectors;
+	float discSize;
+
+	cout << "What is the title of the game?" << endl;
+	cin.ignore();
+	getline(cin, title);
+	physical->setTitle(title);
+
+	cout << "What genre is it?" << endl;
+	getline(cin, genre);
+	physical->setGenre(genre);
+
+	cout << "What year was it released?" << endl;
+	cin >> year;
+	physical->setYear(year);
+
+	cout << "Choose a platform for the game (PS5, Xbox, Switch)" << endl;
+	cin >> platform;
+
+	if (platform == "PS5") {
+		physical->setPlatform(ps5);
+	}
+	else if (platform == "Xbox") {
+		physical->setPlatform(xbox);
+	}
+	else if (platform == "Switch") {
+		physical->setPlatform(switchConsole);
+	}
+	else {
+		cout << "Invalid platform choice!" << endl;
+	}
+
+	cout << "Is this a collector's edition?(0 = false, 1 = true)" << endl;
+	cin >> isCollectors;
+	physicalGame->setIsCollectorEdition(isCollectors);
+
+	cout << "What is the disc size?" << endl;
+	cin >> discSize;
+	physicalGame->setDiscSize(discSize);
+
+	physicalInventory->addGame(physical);
+	fullInventory->addGame(physical);
+
+}
+
+void addDigital() {
+	string title;
+	string genre;
+	int year;
+	string platform;
+	Game* digital = new DigitalGame();
+	DigitalGame* digitalGame = dynamic_cast<DigitalGame*>(digital);
+	float downloadSize;
+
+	cout << "What is the title of the game?" << endl;
+	cin.ignore();
+	getline(cin, title);
+	digital->setTitle(title);
+
+	cout << "What genre is it?" << endl;
+	getline(cin, genre);
+	digital->setGenre(genre);
+
+	cout << "What year was it released?" << endl;
+	cin >> year;
+	digital->setYear(year);
+
+	cout << "Choose a platform for the game (PS5, Xbox, Switch)" << endl;
+	cin >> platform;
+
+	if (platform == "PS5") {
+		digital->setPlatform(ps5);
+	}
+	else if (platform == "Xbox") {
+		digital->setPlatform(xbox);
+	}
+	else if (platform == "Switch") {
+		digital->setPlatform(switchConsole);
+	}
+	else {
+		cout << "Invalid platform choice!" << endl;
+	}
+
+	cout << "What is the download size?" << endl;
+	cin >> downloadSize;
+	digitalGame->setDownloadSize(downloadSize);
+
+	digitalInventory->addGame(digital);
+	fullInventory->addGame(digital);
+
+}
+
+void deleteMenu() {
+	string game;
+	int deleteChoice = -1;
+	cout << "Select Inventory to remove game from" << endl;
+	cout << "-----------------------------------" << endl;
+	cout << "(1) Physical Games Inventory" << endl;
+	cout << "(2) Digital Games Inventory" << endl;
+	cout << "(0) Return to Menu" << endl;
+	cin >> deleteChoice;
+	if (deleteChoice == 1) {
+		cout << "What game would you like to remove from the inventory?" << endl;
+		cin.ignore();
+		getline(cin, game);
+		physicalInventory->removeGame(game);
+		fullInventory->removeGame(game);
+		cout << game << " has been removed from the inventory." << endl;
+	}
+	else if (deleteChoice == 2) {
+		cout << "What game would you like to remove from the inventory?" << endl;
+		cin.ignore();
+		getline(cin, game);
+		digitalInventory->removeGame(game);
+		fullInventory->removeGame(game);
+		cout << game << " has been removed from the inventory." << endl;
+	}
 }
