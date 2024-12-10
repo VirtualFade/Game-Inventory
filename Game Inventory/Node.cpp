@@ -1,14 +1,17 @@
 #include "Node.h"
 
-Node::Node() : game(), next(nullptr), prev(nullptr) {}
+Node::Node() : game(nullptr), next(nullptr), prev(nullptr) {}
 
-Node::Node(const Game& gameInput) : game(gameInput), next(nullptr), prev(nullptr) {}
+Node::Node(Game* gameInput) : game(gameInput), next(nullptr), prev(nullptr) {}
 
-void Node::setGame(const Game& gameInput) {
-	this->game = gameInput;
+Node::~Node() {
 }
 
-Game Node::getGame() const {
+void Node::setGame(Game* gameInput) {
+	game = gameInput;
+}
+
+Game* Node::getGame() const {
 	return game;
 }
 
@@ -33,5 +36,5 @@ bool Node::operator==(const Node& other) const {
 }
 
 bool Node::operator!=(const Node& other) const {
-	return !(game == other.game);
+	return !(*this == other);
 }

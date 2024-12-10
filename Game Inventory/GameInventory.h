@@ -16,7 +16,7 @@ public:
 	GameInventory();
 	~GameInventory();
 
-	void addGame(const Game& game);
+	void addGame(Game* game);
 	bool removeGame(const string& title);
 	Node* searchGame(const string& title) const;
 	void displayAll() const;
