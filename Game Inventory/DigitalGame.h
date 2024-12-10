@@ -17,7 +17,7 @@ public:
     ~DigitalGame() override;
 
     // Setter for downloadSize
-    void setDownloadSize(double size);
+    void setDownloadSize(float size);
 
     // Getter for downloadSize
     float getDownloadSize() const;

@@ -12,7 +12,7 @@ DigitalGame::DigitalGame(const std::string& title, const std::string& genre, int
 DigitalGame::~DigitalGame() {}
 
 // Setter for downloadSize
-void DigitalGame::setDownloadSize(double size) {
+void DigitalGame::setDownloadSize(float size) {
     this->downloadSize = size;
 }
 
