@@ -36,12 +36,30 @@ void addPhysical();
 void addDigital();
 void deleteMenu();
 void initialGames();
+void searchGame();
 
 int main() {
 	initialGames();
 	runChoice();
 	delete fullInventory;
 	return 0;
+}
+
+void searchGame() {
+	string title;
+	Node* found;
+	cout << "What is the title of the game?" << endl;
+	cin.ignore();
+	getline(cin, title);
+	found = fullInventory->searchGame(title);
+	if (found != nullptr) {
+		cout << "----------------------------" << endl;
+		found->getGame()->printInfo();
+		cout << "----------------------------" << endl;
+	}
+	else {
+		cout << "That game is not in the inventory." << endl;
+	}
 }
 
 void initialGames() {
@@ -66,6 +84,7 @@ void initialGames() {
 	fullInventory->addGame(DigGame3);
 
 }
+
 void displayMenu() {
 	cout << " Game Inventory: " << endl;
 	cout << " (" << COUNT << ")" << "Count the number of games in inventory" << endl;
@@ -89,7 +108,7 @@ void menuChoice(int choice) {
 		addMenu();
 		break;
 	case SEARCH:
-		cout << "SEARCH not yet implemented" << endl;
+		searchGame();
 		break;
 	case DELETE_GAME:
 		deleteMenu();
