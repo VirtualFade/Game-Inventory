@@ -41,6 +41,8 @@ int main() {
 	physicalInventory->addGame(newGame);
 	fullInventory->addGame(newGame);
 	runChoice();
+	delete physicalInventory;
+        delete digitalInventory;
 	delete fullInventory;
 	return 0;
 }
