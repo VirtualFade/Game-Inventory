@@ -139,7 +139,6 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameInventory.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ProgramManager.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="PhysicalGame.cpp" />
     <ClCompile Include="Platform.cpp" />
