@@ -35,18 +35,37 @@ void addMenu();
 void addPhysical();
 void addDigital();
 void deleteMenu();
+void initialGames();
 
 int main() {
-	Game* newGame = new PhysicalGame("The last of us Part II", "Action-Adventure", 2020, ps5, false, 50);
-	physicalInventory->addGame(newGame);
-	fullInventory->addGame(newGame);
+	initialGames();
 	runChoice();
-	delete physicalInventory;
-        delete digitalInventory;
 	delete fullInventory;
 	return 0;
 }
 
+void initialGames() {
+	Game* PhysGame = new PhysicalGame("The last of us Part II", "Action-Adventure", 2020, ps5, false, 50);
+	physicalInventory->addGame(PhysGame);
+	fullInventory->addGame(PhysGame);
+	Game* PhysGame2 = new PhysicalGame("Super Mario Party Jamboree", "Party", 2024, switchConsole, false, 5.3);
+	physicalInventory->addGame(PhysGame2);
+	fullInventory->addGame(PhysGame2);
+	Game* PhysGame3 = new PhysicalGame("Halo Infinite", "First-Person Shooter", 2021, xbox, true, 34);
+	physicalInventory->addGame(PhysGame3);
+	fullInventory->addGame(PhysGame3);
+
+	Game* DigGame = new DigitalGame("Call of Duty: Black Ops 6", "First-Person Shooter", 2024, xbox, 85.56);
+	digitalInventory->addGame(DigGame);
+	fullInventory->addGame(DigGame);
+	Game* DigGame2 = new DigitalGame("The Legend of Zelda: Breath of the Wild", "Action RPG", 2017, switchConsole, 13.4);
+	digitalInventory->addGame(DigGame2);
+	fullInventory->addGame(DigGame2);
+	Game* DigGame3 = new DigitalGame("Sonic Frontiers", "Platformer", 2022, ps5, 10.4);
+	digitalInventory->addGame(DigGame3);
+	fullInventory->addGame(DigGame3);
+
+}
 void displayMenu() {
 	cout << " Game Inventory: " << endl;
 	cout << " (" << COUNT << ")" << "Count the number of games in inventory" << endl;
@@ -301,6 +320,9 @@ void deleteMenu() {
 	cout << "(0) Return to Menu" << endl;
 	cin >> deleteChoice;
 	if (deleteChoice == 1) {
+		cout << "Physical Games available" << endl;
+		cout << "------------------------" << endl;
+		physicalInventory->displayAll();
 		cout << "What game would you like to remove from the inventory?" << endl;
 		cin.ignore();
 		getline(cin, game);
@@ -309,6 +331,9 @@ void deleteMenu() {
 		cout << game << " has been removed from the inventory." << endl;
 	}
 	else if (deleteChoice == 2) {
+		cout << "Digital Games available" << endl;
+		cout << "------------------------" << endl;
+		digitalInventory->displayAll();
 		cout << "What game would you like to remove from the inventory?" << endl;
 		cin.ignore();
 		getline(cin, game);
